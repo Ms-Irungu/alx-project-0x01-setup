@@ -2,17 +2,29 @@ import React from 'react'
 import Header from '../../components/layout/Header';
 import PostCard from '@/components/common/PostCard';
 import { PostProps } from '@/interfaces';
+import PostModal from '@/components/common/PostModal';
+import { PostData, PostModalProps } from '@/interfaces';
+import {useState} from 'react';
+
 
 const Posts:React.FC<{posts: PostProps[]}> = ({posts}) => {
   console.log(posts);
   // Assuming posts is an array of PostProps
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [psot, setPost] = useState<PostData | null>(null);
+
+const handleAddPost = (newPost: PostData) => {
+  setPost({ ...newPost, id: posts.length + 1 });
+};
+
   return (
     <div className="flex flex-col h-screen">
       <Header />
       <main className="p-4">
         <div className="flex justify-between items-center">
         <h1 className=" text-2xl font-semibold">Post Content</h1>
-        <button className="bg-blue-700 px-4 py-2 rounded-full text-white">Add Post</button>
+        <button onClick={() => setModalOpen(true)}
+            className="bg-blue-700 px-4 py-2 rounded-full text-white">Add Post</button>
         </div>
         <div className="grid grid-cols-3 gap-2 ">
           {
@@ -22,6 +34,11 @@ const Posts:React.FC<{posts: PostProps[]}> = ({posts}) => {
           }
         </div>
       </main>
+
+        {/* Allows the user application to toggle the state of your modal */}
+      {isModalOpen && (
+        <PostModal onClose={() => setModalOpen(false)} onSubmit={handleAddPost} />
+      )}
     </div>
   )
 }
