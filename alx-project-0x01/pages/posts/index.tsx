@@ -3,7 +3,7 @@ import Header from '../../components/layout/Header';
 import PostCard from '@/components/common/PostCard';
 import { PostProps } from '@/interfaces';
 import PostModal from '@/components/common/PostModal';
-import { PostData, PostModalProps } from '@/interfaces';
+import { PostData } from '@/interfaces';
 import {useState} from 'react';
 
 
@@ -11,7 +11,7 @@ const Posts:React.FC<{posts: PostProps[]}> = ({posts}) => {
   console.log(posts);
   // Assuming posts is an array of PostProps
   const [isModalOpen, setModalOpen] = useState(false);
-  const [psot, setPost] = useState<PostData | null>(null);
+  const [post, setPost] = useState<PostData | null>(null);
 
 const handleAddPost = (newPost: PostData) => {
   setPost({ ...newPost, id: posts.length + 1 });
