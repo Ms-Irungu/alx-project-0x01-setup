@@ -3,14 +3,14 @@ import Header from '../../components/layout/Header';
 import PostCard from '@/components/common/PostCard';
 import { PostProps } from '@/interfaces';
 
-const Posts:React.FC<PostProps[]> = ({posts}) => {
+const Posts:React.FC<{posts: PostProps[]}> = ({posts}) => {
   console.log(posts);
   // Assuming posts is an array of PostProps
   return (
     <div className="flex flex-col h-screen">
       <Header />
       <main className="p-4">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
         <h1 className=" text-2xl font-semibold">Post Content</h1>
         <button className="bg-blue-700 px-4 py-2 rounded-full text-white">Add Post</button>
         </div>
